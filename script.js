@@ -101,8 +101,7 @@ tabBtnContainer.addEventListener('click', function (evt) {
 // better to choose nav__links, but using nav for demonstration
 const navbar = document.querySelector('.nav');
 
-// notice mouseover, not mouseenter
-navbar.addEventListener('mouseover', function (evt) {
+const handleHover = function (evt, opacity) {
 	const navlink = evt.target;
 	if (!navlink.classList.contains('nav__link')) return;
 
@@ -110,12 +109,29 @@ navbar.addEventListener('mouseover', function (evt) {
 	const navlinks = navlink.closest('.nav').querySelectorAll('.nav__link');
 	const logo = navlink.closest('.nav').querySelector('img');
 
-	navlinks.forEach(nl => nl !== navlink && (nl.style.opacity = 0.5));
-	logo.style.opacity = 0.5;
-});
+	navlinks.forEach(nl => nl !== navlink && (nl.style.opacity = opacity));
+	logo.style.opacity = opacity;
+};
 
-// remove effect when mouse out
-navbar.addEventListener('mouseout', function (evt) {
+// METHOD 1
+// navbar.addEventListener('mouseover', function (evt) {
+// 	handleHover(evt, 0.5);
+// });
+
+// navbar.addEventListener('mouseout', function (evt) {
+// 	handleHover(evt, 1);
+// });
+
+// METHOD 2
+// navbar.addEventListener('mouseover', evt => handleHover(evt, 0.5));
+// navbar.addEventListener('mouseout', evt => handleHover(evt, 0.5));
+
+// ===============================
+
+// METHOD 3
+
+// use .bind and this keyword
+const handleHover2 = function (evt) {
 	const navlink = evt.target;
 	if (!navlink.classList.contains('nav__link')) return;
 
@@ -123,6 +139,9 @@ navbar.addEventListener('mouseout', function (evt) {
 	const navlinks = navlink.closest('.nav').querySelectorAll('.nav__link');
 	const logo = navlink.closest('.nav').querySelector('img');
 
-	navlinks.forEach(nl => nl !== navlink && (nl.style.opacity = 1));
-	logo.style.opacity = 1;
-});
+	navlinks.forEach(nl => nl !== navlink && (nl.style.opacity = this));
+	logo.style.opacity = this;
+};
+
+navbar.addEventListener('mouseover', handleHover2.bind(0.5));
+navbar.addEventListener('mouseout', handleHover2.bind(1));
