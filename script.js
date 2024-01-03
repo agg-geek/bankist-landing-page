@@ -47,6 +47,7 @@ btnScrollTo.addEventListener('click', function () {
 // document.querySelectorAll('.nav__link').forEach(function (el) {
 // 	el.addEventListener('click', function (evt) {
 // 		evt.preventDefault();
+//         // el.href will give the absolute address, hence getAttribute is used
 // 		const sectionId = el.getAttribute('href');
 // 		document.querySelector(sectionId).scrollIntoView({ behavior: 'smooth' });
 // 	});
@@ -59,6 +60,7 @@ btnScrollTo.addEventListener('click', function () {
 document.querySelector('.nav__links').addEventListener('click', function (e) {
 	e.preventDefault();
 	if (e.target.classList.contains('nav__link')) {
+		// el.href will give the absolute address, hence getAttribute is used
 		const sectionId = e.target.getAttribute('href');
 		document.querySelector(sectionId).scrollIntoView({ behavior: 'smooth' });
 	}
