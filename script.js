@@ -78,7 +78,9 @@ tabBtnContainer.addEventListener('click', function (evt) {
 	// The tabBtn also contains a span element
 	// if that particular span element is clicked, then evt.target refers to that span
 	const clickedTabBtn = evt.target.closest('.operations__tab');
-	console.log(clickedTabBtn);
+
+	// if the parent element and not button was clicked
+	if (!clickedTabBtn) return;
 
 	tabBtns.forEach(tabBtn => tabBtn.classList.remove('operations__tab--active'));
 	tabsContents.forEach(tabContent => tabContent.classList.remove('operations__content--active'));
