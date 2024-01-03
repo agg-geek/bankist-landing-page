@@ -91,3 +91,38 @@ tabBtnContainer.addEventListener('click', function (evt) {
 	const clickedContent = document.querySelector(`.operations__content--${clickedTabNo}`);
 	clickedContent.classList.add('operations__content--active');
 });
+
+// =====================================================================
+
+// Fade in and out the 'complete' navbar when mouse enters any navlink
+
+// selecting navbar here, but we just need
+// the parent element of navlink for event delegation
+// better to choose nav__links, but using nav for demonstration
+const navbar = document.querySelector('.nav');
+
+// notice mouseover, not mouseenter
+navbar.addEventListener('mouseover', function (evt) {
+	const navlink = evt.target;
+	if (!navlink.classList.contains('nav__link')) return;
+
+	// select all other navlink's (siblings)
+	const navlinks = navlink.closest('.nav').querySelectorAll('.nav__link');
+	const logo = navlink.closest('.nav').querySelector('img');
+
+	navlinks.forEach(nl => nl !== navlink && (nl.style.opacity = 0.5));
+	logo.style.opacity = 0.5;
+});
+
+// remove effect when mouse out
+navbar.addEventListener('mouseout', function (evt) {
+	const navlink = evt.target;
+	if (!navlink.classList.contains('nav__link')) return;
+
+	// select all other navlink's (siblings)
+	const navlinks = navlink.closest('.nav').querySelectorAll('.nav__link');
+	const logo = navlink.closest('.nav').querySelector('img');
+
+	navlinks.forEach(nl => nl !== navlink && (nl.style.opacity = 1));
+	logo.style.opacity = 1;
+});
