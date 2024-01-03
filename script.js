@@ -39,3 +39,15 @@ document.addEventListener('keydown', function (e) {
 btnScrollTo.addEventListener('click', function () {
 	section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+// =====================================================================
+
+// Smooth scrolling for navbar links (Features, Operations and Testimonials)
+
+document.querySelectorAll('.nav__link').forEach(function (el) {
+	el.addEventListener('click', function (evt) {
+		evt.preventDefault();
+		const sectionId = el.getAttribute('href');
+		document.querySelector(sectionId).scrollIntoView({ behavior: 'smooth' });
+	});
+});
