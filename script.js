@@ -75,7 +75,9 @@ const tabBtns = document.querySelectorAll('.operations__tab');
 const tabsContents = document.querySelectorAll('.operations__content');
 
 tabBtnContainer.addEventListener('click', function (evt) {
-	const clickedTabBtn = evt.target;
+	// The tabBtn also contains a span element
+	// if that particular span element is clicked, then evt.target refers to that span
+	const clickedTabBtn = evt.target.closest('.operations__tab');
 	console.log(clickedTabBtn);
 
 	tabBtns.forEach(tabBtn => tabBtn.classList.remove('operations__tab--active'));
