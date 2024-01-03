@@ -65,3 +65,25 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 		document.querySelector(sectionId).scrollIntoView({ behavior: 'smooth' });
 	}
 });
+
+// =====================================================================
+
+// Tabbed component in operations section (using Event delegation)
+
+const tabBtnContainer = document.querySelector('.operations__tab-container');
+const tabBtns = document.querySelectorAll('.operations__tab');
+const tabsContents = document.querySelectorAll('.operations__content');
+
+tabBtnContainer.addEventListener('click', function (evt) {
+	const clickedTabBtn = evt.target;
+	console.log(clickedTabBtn);
+
+	tabBtns.forEach(tabBtn => tabBtn.classList.remove('operations__tab--active'));
+	tabsContents.forEach(tabContent => tabContent.classList.remove('operations__content--active'));
+
+	clickedTabBtn.classList.add('operations__tab--active');
+
+	const clickedTabNo = clickedTabBtn.dataset.tab;
+	const clickedContent = document.querySelector(`.operations__content--${clickedTabNo}`);
+	clickedContent.classList.add('operations__content--active');
+});
