@@ -44,10 +44,22 @@ btnScrollTo.addEventListener('click', function () {
 
 // Smooth scrolling for navbar links (Features, Operations and Testimonials)
 
-document.querySelectorAll('.nav__link').forEach(function (el) {
-	el.addEventListener('click', function (evt) {
-		evt.preventDefault();
-		const sectionId = el.getAttribute('href');
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+// 	el.addEventListener('click', function (evt) {
+// 		evt.preventDefault();
+// 		const sectionId = el.getAttribute('href');
+// 		document.querySelector(sectionId).scrollIntoView({ behavior: 'smooth' });
+// 	});
+// });
+
+// =====================================================================
+
+// Event delegation for implementing smooth scrolling on navbar links
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+	e.preventDefault();
+	if (e.target.classList.contains('nav__link')) {
+		const sectionId = e.target.getAttribute('href');
 		document.querySelector(sectionId).scrollIntoView({ behavior: 'smooth' });
-	});
+	}
 });
