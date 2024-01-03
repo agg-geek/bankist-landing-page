@@ -170,7 +170,7 @@ img {
 
 /* HEADER */
 .header {
-	padding: 0 3rem;
+	/* padding: 0 3rem; */
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
