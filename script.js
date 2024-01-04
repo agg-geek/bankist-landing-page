@@ -184,14 +184,31 @@ navbar.addEventListener('mouseout', handleHover2.bind(1));
 // If the initial page is scrolled from the top of the document, it'll work
 // if there is already some scrolling (say you scrolled,navbar stuck, and then reload)
 // then this does not work well
-const initialSection1Rect = section1.getBoundingClientRect();
 
-window.addEventListener('scroll', function () {
-	if (window.scrollY > initialSection1Rect.top) {
-		// console.log('Below section1, navbar should be stuck');
-		navbar.classList.add('sticky');
-	} else {
-		// console.log('Above section1, navbar should not be stuck');
-		navbar.classList.remove('sticky');
-	}
-});
+// const initialSection1Rect = section1.getBoundingClientRect();
+
+// window.addEventListener('scroll', function () {
+// 	if (window.scrollY > initialSection1Rect.top) {
+// 		// console.log('Below section1, navbar should be stuck');
+// 		navbar.classList.add('sticky');
+// 	} else {
+// 		// console.log('Above section1, navbar should not be stuck');
+// 		navbar.classList.remove('sticky');
+// 	}
+// });
+
+// =====================================================================
+
+// Sticky navigation (Intersection Observer API)
+// navbar sticks to the top whenever we reach section1
+// so we can observe intersection of section1 and other elements (except header) with the root
+// which is equivalent to observing the intersection of header and root (viewport)
+
+const stickyNav = function (entries) {
+	const [entry] = entries;
+	if (!entry.isIntersecting) navbar.classList.add('sticky');
+	else navbar.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, { root: null, threshold: 0 });
+headerObserver.observe(document.querySelector('.header'));
