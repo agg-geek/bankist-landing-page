@@ -5,8 +5,6 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
 
 const openModal = function (evt) {
 	// see explanation in commit description
@@ -33,9 +31,36 @@ document.addEventListener('keydown', function (e) {
 
 // =====================================================================
 
-// Smooth scrolling when 'Learn More' button is clicked
+// Smooth scrolling when 'Learn More' button is clicked (old way)
 
-// NOTDONE: there is a more oldschool way of doing this, check in video
+// const btnScrollTo = document.querySelector('.btn--scroll-to');
+// const section1 = document.querySelector('#section--1');
+
+// btnScrollTo.addEventListener('click', function () {
+// 	const section1React = section1.getBoundingClientRect();
+
+// 	// works when you are at the top of the document
+// 	// breaks when you are scrolled
+// 	// window.scrollTo(section1React.left, section1React.top);
+
+// 	// scrolls correctly from anywhere
+// 	// window.scrollTo(window.scrollX + section1React.left, window.scrollY + section1React.top);
+
+// 	// smooth scrolling
+// 	window.scrollTo({
+// 		left: window.scrollX + section1React.left,
+// 		top: window.scrollY + section1React.top,
+// 		behavior: 'smooth',
+// 	});
+// });
+
+// =====================================================================
+
+// Smooth scrolling when 'Learn More' button is clicked (new way)
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
 btnScrollTo.addEventListener('click', function () {
 	section1.scrollIntoView({ behavior: 'smooth' });
 });
