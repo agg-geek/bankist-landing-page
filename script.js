@@ -271,8 +271,21 @@ document.querySelectorAll('.section').forEach(section => {
 const lazyLoadImg = function (entries) {
 	const [entry] = entries;
 	if (!entry.isIntersecting) return;
-	entry.target.src = entry.target.dataset.src;
-	entry.target.classList.remove('lazy-img');
+
+	entry.target.src = entry.target.dataset.src; // (1)
+	// entry.target.classList.remove('lazy-img');
+
+	// use slow 3G and observe that when the src is changed by (1)
+	// the browser loads the new image in the background
+	// but since the blur effect is already removed (due to removal of lazy-img)
+	// the original lazy image is shown without the blurr effect
+	// which looks bad
+
+	// hence remove the blur effect after the image has loaded
+	// the load event is fired after loading the new image
+	entry.target.addEventListener('load', function () {
+		entry.target.classList.remove('lazy-img');
+	});
 };
 
 const featureImgObserver = new IntersectionObserver(lazyLoadImg, {
