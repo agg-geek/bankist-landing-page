@@ -204,11 +204,17 @@ navbar.addEventListener('mouseout', handleHover2.bind(1));
 // so we can observe intersection of section1 and other elements (except header) with the root
 // which is equivalent to observing the intersection of header and root (viewport)
 
+const navbarHeight = navbar.getBoundingClientRect().height;
 const stickyNav = function (entries) {
 	const [entry] = entries;
 	if (!entry.isIntersecting) navbar.classList.add('sticky');
 	else navbar.classList.remove('sticky');
 };
 
-const headerObserver = new IntersectionObserver(stickyNav, { root: null, threshold: 0 });
+const headerObserver = new IntersectionObserver(stickyNav, {
+	root: null,
+	threshold: 0,
+	// consider observed element as being constrained in the area after leaving this margin
+	rootMargin: `-${navbarHeight}px`,
+});
 headerObserver.observe(document.querySelector('.header'));
