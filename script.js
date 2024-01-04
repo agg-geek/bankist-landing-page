@@ -338,6 +338,7 @@ createSlideDots();
 
 let currSlide = 0;
 goToSlide(currSlide); // initially on page load
+activateDot(currSlide);
 
 const sliderBtnLeft = document.querySelector('.slider__btn--left');
 const sliderBtnRight = document.querySelector('.slider__btn--right');
