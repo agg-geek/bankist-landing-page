@@ -255,3 +255,29 @@ document.querySelectorAll('.section').forEach(section => {
 	// observe multiple sections
 	sectionObserver.observe(section);
 });
+
+// =====================================================================
+
+// Lazy loading images
+
+// default images in the HTML are the
+// really small (lazy) versions of the actual image (find digital-lazy)
+// they have a blur effect applied through CSS on the lazy-img class
+// img elem has a data src defined, which is the actual image
+
+// you might notice that the first entry gets fired a bit early
+// this is because the section is translateY to the bottom by section--hidden
+// to implement the reveal effect
+const lazyLoadImg = function (entries) {
+	const [entry] = entries;
+	if (!entry.isIntersecting) return;
+	entry.target.src = entry.target.dataset.src;
+	entry.target.classList.remove('lazy-img');
+};
+
+const featureImgObserver = new IntersectionObserver(lazyLoadImg, {
+	root: null,
+	threshold: 0,
+});
+
+document.querySelectorAll('.features__img').forEach(img => featureImgObserver.observe(img));
