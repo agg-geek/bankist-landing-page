@@ -230,6 +230,11 @@ headerObserver.observe(document.querySelector('.header'));
 const revealSection = function (entries, observer) {
 	const [entry] = entries;
 
+	// a default entry is created automatically by the API
+	// this entry has target section1, due to which
+	// section1 was already added to the page without any hover effect
+	if (!entry.isIntersecting) return;
+
 	// since we are observing multiple sections,
 	// we need the particular section observed, given by entry.target
 	entry.target.classList.remove('section--hidden');
