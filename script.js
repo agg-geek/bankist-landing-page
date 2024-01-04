@@ -334,15 +334,6 @@ const activateDot = function (slide) {
 	document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
 };
 
-createSlideDots();
-
-let currSlide = 0;
-goToSlide(currSlide); // initially on page load
-activateDot(currSlide);
-
-const sliderBtnLeft = document.querySelector('.slider__btn--left');
-const sliderBtnRight = document.querySelector('.slider__btn--right');
-
 const prevSlide = function () {
 	currSlide = (currSlide - 1 + slides.length) % slides.length;
 	goToSlide(currSlide);
@@ -355,8 +346,17 @@ const nextSlide = function () {
 	activateDot(currSlide);
 };
 
-sliderBtnLeft.addEventListener('click', prevSlide);
-sliderBtnRight.addEventListener('click', nextSlide);
+let currSlide = 0;
+const implementSlider = function () {
+	goToSlide(currSlide); // initially on page load
+	createSlideDots();
+	activateDot(currSlide);
+};
+
+implementSlider();
+
+document.querySelector('.slider__btn--left').addEventListener('click', prevSlide);
+document.querySelector('.slider__btn--right').addEventListener('click', nextSlide);
 
 document.addEventListener('keydown', function (e) {
 	e.key === 'ArrowLeft' && prevSlide();
