@@ -238,6 +238,10 @@ const revealSection = function (entries, observer) {
 	// since we are observing multiple sections,
 	// we need the particular section observed, given by entry.target
 	entry.target.classList.remove('section--hidden');
+
+	// once the section has been scrolled, observer was still observing the section
+	// hence unobserve it for performance issues
+	observer.unobserve(entry.target); // notice use of observer from fn param rather than using sectionObserver
 };
 
 const sectionObserver = new IntersectionObserver(revealSection, {
