@@ -327,12 +327,20 @@ goToSlide(currSlide); // initially on page load
 const sliderBtnLeft = document.querySelector('.slider__btn--left');
 const sliderBtnRight = document.querySelector('.slider__btn--right');
 
-sliderBtnLeft.addEventListener('click', function () {
+const prevSlide = function () {
 	currSlide = (currSlide - 1 + slides.length) % slides.length;
 	goToSlide(currSlide);
-});
+};
 
-sliderBtnRight.addEventListener('click', function () {
+const nextSlide = function () {
 	currSlide = (currSlide + 1) % slides.length;
 	goToSlide(currSlide);
+};
+
+sliderBtnLeft.addEventListener('click', prevSlide);
+sliderBtnRight.addEventListener('click', nextSlide);
+
+document.addEventListener('keydown', function (e) {
+	e.key === 'ArrowLeft' && prevSlide();
+	e.key === 'ArrowRight' && nextSlide();
 });
