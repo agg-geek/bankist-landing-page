@@ -180,9 +180,18 @@ navbar.addEventListener('mouseout', handleHover2.bind(1));
 // Hence it is not efficient for this task
 
 // we take the DOMRect of section1 on page load, ie when there is no scrolling
+// This does not work reliably
+// If the initial page is scrolled from the top of the document, it'll work
+// if there is already some scrolling (say you scrolled,navbar stuck, and then reload)
+// then this does not work well
 const initialSection1Rect = section1.getBoundingClientRect();
 
 window.addEventListener('scroll', function () {
-	if (window.scrollY > initialSection1Rect.top) navbar.classList.add('sticky');
-	else navbar.classList.remove('sticky');
+	if (window.scrollY > initialSection1Rect.top) {
+		// console.log('Below section1, navbar should be stuck');
+		navbar.classList.add('sticky');
+	} else {
+		// console.log('Above section1, navbar should not be stuck');
+		navbar.classList.remove('sticky');
+	}
 });
