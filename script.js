@@ -170,3 +170,19 @@ const handleHover2 = function (evt) {
 
 navbar.addEventListener('mouseover', handleHover2.bind(0.5));
 navbar.addEventListener('mouseout', handleHover2.bind(1));
+
+// =====================================================================
+
+// Sticky navigation
+// Stick the navbar to the top as soon as you reach section1
+
+// Implementation using scroll event, which is fired each time page is scrolled
+// Hence it is not efficient for this task
+
+// we take the DOMRect of section1 on page load, ie when there is no scrolling
+const initialSection1Rect = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', function () {
+	if (window.scrollY > initialSection1Rect.top) navbar.classList.add('sticky');
+	else navbar.classList.remove('sticky');
+});
