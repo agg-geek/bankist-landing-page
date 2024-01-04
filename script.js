@@ -316,10 +316,20 @@ document.querySelectorAll('.features__img').forEach(img => featureImgObserver.ob
 // ===============================
 
 const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.querySelector('.dots');
 
 const goToSlide = function (currSlide) {
 	slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - currSlide)}%)`));
 };
+
+const createSlideDots = function () {
+	for (let i = 0; i < slides.length; i++) {
+		const dot = `<button class="dots__dot" data-slide="${i}"></button>`;
+		dotsContainer.insertAdjacentHTML('beforeend', dot);
+	}
+};
+
+createSlideDots();
 
 let currSlide = 0;
 goToSlide(currSlide); // initially on page load
@@ -343,4 +353,9 @@ sliderBtnRight.addEventListener('click', nextSlide);
 document.addEventListener('keydown', function (e) {
 	e.key === 'ArrowLeft' && prevSlide();
 	e.key === 'ArrowRight' && nextSlide();
+});
+
+dotsContainer.addEventListener('click', function (evt) {
+	if (!evt.target.classList.contains('dots__dot')) return;
+	goToSlide(evt.target.dataset.slide);
 });
