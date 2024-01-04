@@ -218,3 +218,31 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 	rootMargin: `-${navbarHeight}px`,
 });
 headerObserver.observe(document.querySelector('.header'));
+
+// =====================================================================
+
+// Reveal sections on scroll
+
+// there is a section--hidden class that hides the section
+// it is not added to all sections by default, so add them (see below)
+// when you scroll to that section, remove the class
+
+const revealSection = function (entries, observer) {
+	const [entry] = entries;
+
+	// since we are observing multiple sections,
+	// we need the particular section observed, given by entry.target
+	entry.target.classList.remove('section--hidden');
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+	root: null,
+	threshold: 0.15, // notice
+});
+
+document.querySelectorAll('.section').forEach(section => {
+	// add classLists initially to all the sections
+	section.classList.add('section--hidden');
+	// observe multiple sections
+	sectionObserver.observe(section);
+});
