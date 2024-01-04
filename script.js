@@ -291,6 +291,48 @@ const lazyLoadImg = function (entries) {
 const featureImgObserver = new IntersectionObserver(lazyLoadImg, {
 	root: null,
 	threshold: 0,
+	// rootMargin: '200px', // use unknown
 });
 
 document.querySelectorAll('.features__img').forEach(img => featureImgObserver.observe(img));
+
+// =====================================================================
+
+// Slider component
+
+// there is a slider component which contains different slide components
+// each slide component slides using relevant translateX
+// slide 0 has translateX (0%), slide 1 has 100%, slide 2 has 200% and so on
+// if we slide right, 0: -100%, 1: 0% and so on
+
+// ===============================
+
+// used below stuff for development purpose:
+// find and comment this line in the script above: // section.classList.add('section--hidden');
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.4) translateX(-500px)';
+// slider.style.overflow = 'visible';
+
+// ===============================
+
+const slides = document.querySelectorAll('.slide');
+
+const goToSlide = function (currSlide) {
+	slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - currSlide)}%)`));
+};
+
+let currSlide = 0;
+goToSlide(currSlide); // initially on page load
+
+const sliderBtnLeft = document.querySelector('.slider__btn--left');
+const sliderBtnRight = document.querySelector('.slider__btn--right');
+
+sliderBtnLeft.addEventListener('click', function () {
+	currSlide = (currSlide - 1 + slides.length) % slides.length;
+	goToSlide(currSlide);
+});
+
+sliderBtnRight.addEventListener('click', function () {
+	currSlide = (currSlide + 1) % slides.length;
+	goToSlide(currSlide);
+});
