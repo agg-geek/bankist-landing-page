@@ -1,17 +1,9 @@
-# Jonas JS Banking: Landing Page
+# Banking: Landing Page
 
-## Learning goal
+### Links
 
--   Advanced DOM Manipulation
+-   [Live demo](https://agg-geek.github.io/bankist-landing-page/)
 
-## Section
+### To-do
 
-Section 13
-
-## Links
-
--   [Live Demo]()
-
-## To-do
-
-## Issues
+### Issues
